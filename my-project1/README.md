@@ -1,6 +1,6 @@
-# repository1
+# my-project1
 
-> My mathematical Nuxt.js project
+> nuxt-create-app試しただけ
 
 ## Build Setup
 
