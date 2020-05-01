@@ -1,7 +1,7 @@
 # repository
 学習用リポジトリ
 
-## my-project1
+## css-learning
 CSS設計学習
 
 ## my-project1
