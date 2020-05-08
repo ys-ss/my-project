@@ -7,8 +7,8 @@ module.exports = {
   mode: 'production',
   entry: './src/js/main.js',
   output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -52,4 +52,11 @@ module.exports = {
   optimization: {
     minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
+  devServer: {
+    // contentBase: path.join(__dirname, 'pages'),
+    // watchContentBase: true,
+    port: 3000,
+    open: true,
+    openPage: '/pages/index.html'
+	},
 };

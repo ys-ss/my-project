@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/dist/style.css">
+  <title>CSS設計について（自分用）</title>
+</head>
+<body>
+  <header class="head">
+    <div class="head__wrap">
+      <h1 class="head__title">CSS設計について（自分用）</h1>
+      <div class="menu">
+        <div class="menu__trigger">
+          <a class="menu__btn" href="javascript:void(0)">
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+          </a>
+        </div>
+        <nav>
+          <ul class="menu__items">
+            <li class="menu__item"><a class="menu__link" href="/pages/index.html">TOP</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/oocss/index.html">OOCSS</a></li>
+            <li class="menu__item"><a class="menu__link menu__link--current" href="/pages/smacss/index.html">SMACSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/bem/index.html">BEM</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/flocss/index.html">FLOCSS</a></li>
+          </ul>
+        </nav>
+        <div class="menu__bg"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h2 class="main__title">SMACSS</h2>
+    <section class="contents mb60">
+      <h3 class="contents__title">SMACSSとは</h3>
+      <p>
+        SMACSS（スマックス）は、Scalable and Modular Architecture for CSS（拡張可能でモジュール的なCSS設計）の略。<br>
+        スタイルをBase、Layout、Module、State、Themeの5つに分けて考える。
+      </p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Base</h3>
+      <p>
+        プロジェクトにおける標準のスタイルを定義する。主に要素セレクターとなる。<br>
+        「プロジェクト内において、各要素が標準としてどのように振る舞うか」を定義するためのルールであるため、特例の状況下での使用が想定されるIDセレクターやクラスセレクターは使用できない。<br>
+        SMACSSでは、リセットCSSもベースルールとして含む。
+      </p>
+      <div class="code">
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">body {
+    background-color: #fff;
+  }
+
+  a > img {
+    transition: .25s;
+  }
+
+  ul > li {
+    margin-bottom: 10px;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+</code></pre>
+      </div>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Layout</h3>
+      <p>ヘッダーやメインエリアなどのWebサイトの大枠を構成する大きなモジュールに対するルール。<br>レイアウトを構成するものの多くはページ内で一度しか使用されないことが多いため、IDセレクターによるスタイリングが許容されている。繰り返し使用されるモジュールについては、クラスセレクターを利用します。レイアウトルールにおいて、クラスセレクターを使用する際は、「l-」という接頭辞をつけることが推奨されている。</p>
+      <div class="code">
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">l-header {
+  width: 1080px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+l-main {
+  width: 1080px;
+  margin: 20px auto;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Module</h3>
+      <p>レイアウトモジュール内に配置されていることを想定しているもの。<br>
+        レイアウトモジュールは、1ページ内で繰り返し使用されることが想定されるため、モジュールのルート要素には必ずクラスセレクターを使用する。<br>
+        また、モジュールを作成する際に気をつけるべき事項として、以下の2点がある。
+      </p>
+      <ul class="text-list">
+        <li class="text-list__item">なるべく要素型セレクターを使用しない</li>
+        <li class="text-list__item">特定のコンテキストにみだりに依存しない</li>
+      </ul>
+
+      <section>
+        <h3 class="contents__sub-title">要素をセマンティックにする（セマンティックな要素にのみ要素型セレクターを使う）</h3>
+        <ul class="text-list">
+          <li class="text-list__item">要素をセマンティックにする</li>
+          <li class="text-list__item">div要素とspan要素にはクラスをつける（divやspan要素にはセマンティック性がないため）</li>
+        </ul>
+        <div class="code">
+          <p class="code__title">HTML</p>
+          <pre><code class="language-markup">&lt;div class="contents"&gt;
+  &lt;div class="contents-body"&gt;
+    &lt;h2&gt;見出し&lt;/h2&gt;
+    &lt;p&gt;テキスト&lt;/p&gt;
+    &lt;h3&gt;小見出し&lt;/h3&gt;
+    &lt;span class="contents-sub-text"&gt;テキスト&lt;/span&gt;
+  &lt;/div&gt;
+&lt;div&gt;</code></pre>
+          <p class="code__title mt30">CSS</p>
+          <pre><code class="language-css">.contents {
+  width: 200px;
+}
+
+.contents-body {
+  width: 100px;
+}
+
+.contents > h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.contents > h3 {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.contents-sub-text {
+  color: #555;
+  font-size: 14px;
+}</code></pre>
+        </div>
+        <p class="mt30">つまり、SMACSSの考えるセマンティック性は、下記の式が成り立つ。</p>
+        <p>クラス属性がついた要素 > 見出しなどの意味をもつ要素 > div要素・span要素などの凡用的な要素</p>
+        <p>また、要素型セレクターを使用する際は、子孫セレクターではなく子セレクターとすることをSMACSSでは推奨している。</p>
+      </section>
+
+      <section class="mt30">
+        <h3 class="contents__sub-title">スタイルを上書きするためのサブクラス</h3>
+        <p>「モジュールが特定の場所にある場合、スタイルを上書きしたい」場合に使用する。</p>
+        <div class="code">
+          <p class="code__title">HTML</p>
+          <pre><code class="language-markup">&lt;header&gt;
+  &lt;a href="#" class="btn btn-small"&gt;ログイン&lt;/a&gt;
+  &lt;a href="#" class="btn btn-small btn-long"&gt;お問い合わせ&lt;/a&gt;
+&lt;/header&gt;
+</code></pre>
+          <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">.btn {
+  display: inline-block;
+  width: 200px;
+  padding: 10px 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.btn.btn-small {
+  width: 80px;
+  font-size: 16px;
+}
+
+.btn.btn-long {
+  width: 160px;
+}
+
+.l-header {
+  width: 1080px;
+  margin: 0 auto;
+}</code></pre>
+        </div>
+        <p class="mt30">SMACSSでは、モジュールに変化がある場合は、なるべく「ヘッダーの中にある場合」といったような特定のコンテキストに依存するセレクターを使うのではなく、サブクラスによる解決を推奨しています。<br>この実装はヘッダーに依存していないため、ヘッダー外のどのような場所でも使用できる。</p>
+      </section>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">State（状態）</h3>
+      <p>既存のスタイルを上書き・拡張するために使用される。</p>
+      <ul class="text-list">
+        <li class="text-list__item">状態スタイルはレイアウトやモジュールに割り当てることができる。</li>
+        <li class="text-list__item">状態スタイルはJavaScriptに依存するという意味をもつ。</li>
+      </ul>
+      <p>
+        ステートルールの状態スタイルのクラス名はすべて「is-」の接頭辞が付く。<br>
+        状態スタイルにモジュール名を含めることで、本来想定しないモジュールにつけてしまうことを防げる。
+      </p>
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;ul class="tavnav"&gt;
+  &lt;li&gt;&lt;a href="#" class="is-active"&gt;タブ1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;タブ2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;タブ3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;タブ4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">.tabnav {
+  display: flex;
+}
+
+.tabnav > li > a {
+  display: block;
+  padding: 10px 30px;
+}
+
+/* アクティブ時のスタイリング */
+.is-active {
+  background-color: #ddd;
+}
+
+.is-active > a {
+  pointer-events: none;
+  color: #333;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="contents">
+      <h3 class="contents__title">Theme</h3>
+      <p>サイト内の色、テキスト処理などを一定の法則に従い上書きするもので、既存のあらゆるスタイリングが上書きの対象となる。<br>大規模なテーマを作成する場合は、対象となるモジュールに「theme-」の接頭辞をつけることを推奨している。</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small class="foot__copyright">&copy; 2020 hogehoge</small>
+  </footer>
+  <script src="/dist/bundle.js"></script>
+</body>
+</html>

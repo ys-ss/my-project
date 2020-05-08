@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/dist/style.css">
+  <title>CSS設計について（自分用）</title>
+</head>
+<body>
+  <header class="head">
+    <div class="head__wrap">
+      <h1 class="head__title">CSS設計について（自分用）</h1>
+      <div class="menu">
+        <div class="menu__trigger">
+          <a class="menu__btn" href="javascript:void(0)">
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+          </a>
+        </div>
+        <nav>
+          <ul class="menu__items">
+            <li class="menu__item"><a class="menu__link menu__link--current" href="/pages/index.html">TOP</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/oocss/index.html">OOCSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/smacss/index.html">SMACSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/bem/index.html">BEM</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/flocss/index.html">FLOCSS</a></li>
+          </ul>
+        </nav>
+        <div class="menu__bg"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="contents mb60">
+      <h2 class="contents__title">CSS設計とは</h2>
+      <p class="contents__text">CSSを設計する時のルール。<br>開発するWebサイトの性質や規模によって、最適なCSS設計を用いることで、「よいCSS」にすることができる。</p>
+    </section>
+
+    <section class="contents mb60">
+      <h2 class="contents__title">よいCSS設計が目指す4つのゴール</h2>
+      <p class="contents__text">「よいCSSとは何か」を考える際に役立つ指針が「よいCSS設計が目指す4つのゴール」である。</p>
+      <dl class="guideline">
+        <dt class="guideline__title">予測できる</dt>
+        <dd class="guideline__text">新しいスタイリングを追加する、または既存のスタイリングを更新しても、自分の意図しない箇所に影響を与えないよう設計する。</dd>
+        <dt class="guideline__title">再利用できる</dt>
+        <dd class="guideline__text">既存のパーツを別の箇所でも使用したいとなったとき、コードをいちいち書き直したり上書きする手間がない状態にする。</dd>
+        <dt class="guideline__title">保守できる</dt>
+        <dd class="guideline__text">新しいモジュールや機能を追加・更新、あるいは配置換えしたとき、既存のCSSをリファクタリングする必要がない状態にする。</dd>
+        <dt class="guideline__title">拡張できる</dt>
+        <dd class="guideline__text">CSSに携わる人が一人であっても、複数からなるチームであっても、問題なく管理できる状態にする。</dd>
+      </dl>
+    </section>
+
+    <section class="contents">
+      <h2 class="contents__title">CSS設計手法</h2>
+      <ul class="css-list">
+        <li class="css-list__item">
+          <a class="css-list__link" href="/pages/oocss/index.html"><span class="css-list__text">OOCSS</span></a>
+        </li>
+        <li class="css-list__item">
+          <a class="css-list__link" href="/pages/smacss/index.html"><span class="css-list__text">SMACSS</span></a>
+        </li>
+        <li class="css-list__item">
+          <a class="css-list__link" href="/pages/bem/index.html"><span class="css-list__text">BEM</span></a>
+        </li>
+        <li class="css-list__item">
+          <a class="css-list__link" href="/pages/flocss/index.html"><span class="css-list__text">FLOCSS</span></a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small class="foot__copyright">&copy; 2020 hogehoge</small>
+  </footer>
+
+  <script src="/dist/bundle.js"></script>
+</body>
+</html>

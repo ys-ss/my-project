@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/dist/style.css">
+  <title>CSS設計について（自分用）</title>
+</head>
+<body>
+  <header class="head">
+    <div class="head__wrap">
+      <h1 class="head__title">CSS設計について（自分用）</h1>
+      <div class="menu">
+        <div class="menu__trigger">
+          <a class="menu__btn" href="javascript:void(0)">
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+          </a>
+        </div>
+        <nav>
+          <ul class="menu__items">
+            <li class="menu__item"><a class="menu__link menu__link--current" href="/pages/index.html">TOP</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/oocss/index.html">OOCSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/smacss/index.html">SMACSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="/pages/bem/index.html">BEM</a></li>
+            <li class="menu__item"><a class="menu__link menu__link--current" href="/pages/flocss/index.html">FLOCSS</a></li>
+          </ul>
+        </nav>
+        <div class="menu__bg"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h2 class="main__title">FLOCSS</h2>
+    <section class="contents mb60">
+      <h3 class="contents__title">FLOCSSとは</h3>
+      <p>
+        「Foundation Layout Object CSS」の略。<br>
+        OOCSSやBEM、SMACSSのいいとこ取りをしたCSS設計思想。<br>
+        FLOCSSは次の3つのレイヤーと、Objectレイヤーの子レイヤーで構成されている。
+      </p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Foundation</h3>
+      <p>Reset.cssやNormalize.cssなどサイト全体のデフォルトスタイルを管理する。</p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Layout</h3>
+      <p>各ページを構成するヘッダーやフッターなどのサイト全体で共通したエリアを管理する。</p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Object</h3>
+      <p>サイト全体で再利用できるパターンを持つモジュールを管理する。<br>FLOCSSでのObjectは、さらに次の3つのレイヤーに分けられている。</p>
+      <dl>
+        <dt class="contents__sub-title mt30">Component</dt>
+        <dt>再利用できるパターンとして、小さな単位のモジュールを定義する。</dt>
+        <dt class="contents__sub-title mt30">Project</dt>
+        <dd>いくつかのComponentと、それに該当しない要素によって構成される大きな単位のモジュールを定義する。</dd>
+        <dd class="contents__sub-title mt30">Utility</dd>
+        <dd>ComponentとProjectのモディファイアで解決することが難しい・適切では無い、わずかなスタイルの調整のための便利クラスなどを定義する。</dd>
+      </dl>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">MindBEMding</h3>
+      <p>BEMシステムのシンタックスである、Block、Element、Modifierに分類して構成される規則を採用されている。</p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">JavaScriptで操作され、状態を変化させるためのクラス</h3>
+      <p>JavaScriptで操作されるような「状態」を表すようなModifierについては、SMACSSのStateパターンの命名を拝借し、is-*プレフィックスを付与し、.is-activeというようにする。</p>
+    </section>
+
+    <section class="contents">
+      <h3 class="contents__title">プレフィックス</h3>
+      <p>役割を明確にするためにプレフィックスをつけることを推奨する。</p>
+      <ul class="text-list">
+        <li class="text-list__item">Layout - .l-*</li>
+        <li class="text-list__item">Component - .c-*</li>
+        <li class="text-list__item">Project - .p-*</li>
+        <li class="text-list__item">Utility - .u-*</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small class="foot__copyright">&copy; 2020 hogehoge</small>
+  </footer>
+  <script src="/dist/bundle.js"></script>
+</body>
+</html>
