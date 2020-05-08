@@ -1,5 +1,5 @@
 # css-learning
-CSS学習内容まとめたサイト
+CSS設計の学習内容まとめたサイト
 
 ## Build Setup
 
