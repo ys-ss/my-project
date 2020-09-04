@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../dist/style.css">
+  <title>CSS設計について</title>
+</head>
+<body>
+  <header class="head">
+    <div class="head__wrap">
+      <h1 class="head__title">CSS設計について</h1>
+      <div class="menu">
+        <div class="menu__trigger">
+          <a class="menu__btn" href="javascript:void(0)">
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+          </a>
+        </div>
+        <nav>
+          <ul class="menu__items">
+            <li class="menu__item"><a class="menu__link" href="../index.html">TOP</a></li>
+            <li class="menu__item"><a class="menu__link menu__link--current" href="../oocss/index.html">OOCSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="../smacss/index.html">SMACSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="../bem/index.html">BEM</a></li>
+            <li class="menu__item"><a class="menu__link" href="../flocss/index.html">FLOCSS</a></li>
+          </ul>
+        </nav>
+        <div class="menu__bg"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h2 class="main__title">OOCSS</h2>
+    <section class="contents mb60">
+      <h3 class="contents__title">OOCSSとは</h3>
+      <p>
+        OOCSSは、Object Oritented CSS（オブジェクト指向CSS）の略。<br>
+        OOCSSでは、以下の2点がポイントとなる。
+      </p>
+      <ul class="text-list">
+        <li class="text-list__item">ストラクチャー（構造）とスキン（見た目）の分離</li>
+        <li class="text-list__item">コンテナとコンテンツの分離</li>
+      </ul>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">ストラクチャーとスキンの分離</h3>
+      <p><span class="text__bold">「ストラクチャー（横幅や高さなど）とスキン（文字色や背景色など）」の組み合わせ</span>で成り立っていると考えるのが「ストラクチャーとスキンの分離」の考え方となる。</p>
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;div id="contents"&gt;
+  &lt;button class="btn general"&gt;通常ボタン&lt;/button&gt;
+  &lt;button class="btn warning"&gt;警告ボタン&lt;/button&gt;
+&lt;div&gt;</code></pre>
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">/* ストラクチャー */
+.btn {
+  display: inline-block;
+  width: 100px;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+}
+
+/* スキン */
+#contents .general {
+  color: #fff;
+  background-color: #666;
+}
+
+#contents .warning {
+  color: #fff;
+  background-color: #e4CC2D;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="contents">
+      <h3 class="contents__title">コンテナとコンテンツの分離</h3>
+      <p>「コンテナとコンテンツの分離」とは「モジュールをなるべく特定のエリアに依存させない」という方針を指す。</p>
+      <p>部品（コンテンツ）が、他の場所でも再利用ができるように親要素（コンテナ）に依存しないようにする。</p>
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;div id="contents"&gt;
+  &lt;button class="btn"&gt;通常ボタン&lt;/button&gt;
+&lt;div&gt;</code></pre>
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">/* × 親要素に依存している */
+#contents .btn {
+  display: inline-block;
+  width: 100px;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+}
+
+/* ○ 親要素に依存していないため、再利用ができる */
+.btn {
+  display: inline-block;
+  width: 100px;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small class="foot__copyright">&copy; 2020 hogehoge</small>
+  </footer>
+  <script src="../../dist/bundle.js"></script>
+</body>
+</html>

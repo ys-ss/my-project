@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../dist/style.css">
+  <title>CSS設計について</title>
+</head>
+<body>
+  <header class="head">
+    <div class="head__wrap">
+      <h1 class="head__title">CSS設計について</h1>
+      <div class="menu">
+        <div class="menu__trigger">
+          <a class="menu__btn" href="javascript:void(0)">
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+            <span class="menu__btn-border"></span>
+          </a>
+        </div>
+        <nav>
+          <ul class="menu__items">
+            <li class="menu__item"><a class="menu__link" href="../index.html">TOP</a></li>
+            <li class="menu__item"><a class="menu__link" href="../oocss/index.html">OOCSS</a></li>
+            <li class="menu__item"><a class="menu__link" href="../smacss/index.html">SMACSS</a></li>
+            <li class="menu__item"><a class="menu__link menu__link--current" href="../bem/index.html">BEM</a></li>
+            <li class="menu__item"><a class="menu__link" href="../flocss/index.html">FLOCSS</a></li>
+          </ul>
+        </nav>
+        <div class="menu__bg"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h2 class="main__title">BEM</h2>
+    <section class="contents mb60">
+      <h3 class="contents__title">BEMとは</h3>
+      <p>
+        BEMは、Block・Element・Modifierの略。<br>
+        名前の通りモジュールを、Block・Element・Modifierという単位で分解し定義されている。<br>
+        BEMでは、CSSのスタイリングにおいて、要素セレクターやIDセレクターの使用は推奨されていない。クラスセレクターの使用が基本となる。<br>
+        Modifierによる上書きがしやすくなるため、詳細度を均一に保つ。
+      </p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">前提</h3>
+      <p>BEMの中でも特にMindBEMdingと呼ばれている命名法をベースとする。</p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Block</h3>
+      <p>
+        Blockは、どこでも使いまわせるパーツ。<br>
+        そのため、Block自体にレイアウトに関するスタイリング（周りに影響を及ぼすpositionやfloat、marginなど）をしてはいけない。
+      </p>
+      <section class="mt30">
+        <h4 class="contents__sub-title">命名規則</h4>
+        <p>
+          クラス名は「それが何なのか」を表すようにする。<br>
+          「何であるか」「何のために使用されるか」を表す命名は適切で、「見た目」だけを表す命名は適切ではない。
+        </p>
+      </section>
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;!-- × 「見た目」を表す命名であるため、適切ではない --&gt;
+&lt;div class="red-text"&gt;&lt;/div&gt;
+
+&lt;!-- ○ エラーであることを表しているため、適切 --&gt;
+&lt;div class="error"&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Element</h3>
+      <p>Blockの次の単位となるElementは「Blockを構成し、Blockの外では独立して使用できないもの」と定義されている。<br>ElementはBlockを構成する要素で、ModifierはBlockの異なる状態を表す。</p>
+      <section class="mt30">
+        <h4 class="contents__sub-title">命名規則</h4>
+        <p>
+          Elementのクラス名は、Blockの名前を継承し、アンダースコアをふたつを記述した後にElementの名前を付ける。<br>
+          Element名に使用する単語についてもBLockと同じく、「それが何なのか」を表す単語を使用する。<br>
+          なお、BEMではElementの中にElementがネストされた命名は推奨されていない。
+        </p>
+        <ul class="text-list">
+          <li class="text-list__item">Block内でElementが移動することがある</li>
+          <li class="text-list__item">いくつかのElementがない状態で、使われることがある</li>
+          <li class="text-list__item">Elementを後から追加することがある</li>
+        </ul>
+        <p>
+          など、Blockの構造が変わる可能性があるため。<br>
+          推奨されていないのは、「ネストされた命名」のため、Elementの中にElementがネストされている状態は問題ない。
+        </p>
+      </section>
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;!-- Block（ul要素） --&gt;
+&lt;ul class="menu"&gt;
+  &lt;!-- Element（li要素、a要素） --&gt;
+  &lt;li class="menu__item"&gt;&lt;a href="tab1" class="menu__link"&gt;タブ1&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="menu__item"&gt;&lt;a href="tab2" class="menu__link"&gt;タブ2&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="menu__item"&gt;&lt;a href="tab3" class="menu__link"&gt;タブ3&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="menu__item"&gt;&lt;a href="tab4" class="menu__link"&gt;タブ4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </div>
+      <p class="mt30">
+        Elementは、必ずBlock内に配置する。<br>
+        Elementは、「Blockを構成するオプション要素」という位置づけであるため、Blockが必ずしもElementを持たなければいけないわけではない。
+      </p>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Modifier</h3>
+      <p>
+        Modifierは、「BlockもしくはElementの見た目や状態、振る舞いを定義するもの」と定義されている。<br>
+        Modifierを単独で使用することはできず、必ずBlockかElementのクラス名がある状態で、ふたつ目以降のクラス名としてModifierをつける。
+      </p>
+
+      <section class="mt30">
+        <h4 class="contents__sub-title">命名規則</h4>
+        <p>
+          MindBEMdingでの、Modifierの命名規則は、Modifierを適用したいBlockまたはElementの名前を継承し、ハイフンをふたつ記述した後にModifierの名前をつける。<br>
+          複数の単語を含む場合は、BlockやElementと同じようにハイフンケースで記述する。<br>
+          BlockとElementのクラス名の命名が主に「それが何であるか」ということを重視しているのに対し、Modifierの命名は「それがどうであるか」を重視する。
+        </p>
+      </section>
+
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;!-- BEM本来のModifierの書き方 --&gt;
+&lt;a href="#" class="button button_size_s"&gt;ボタン&lt;/a&gt;
+
+&lt;!-- MindBEMdingで紹介されているModifierの書き方 --&gt;
+&lt;a href="#" class="button button--s"&gt;ボタン&lt;/a&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="contents mb60">
+      <h3 class="contents__title">Blockのネスト</h3>
+      <p>Blockは、他のあらゆるBlockの中にネストとして設置することができる。</p>
+
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;!-- ヘッダー Block --&gt;
+&lt;header class="head"&gt;
+  &lt;!-- ネストされたメニュー Block --&gt;
+  &lt;div class="menu"&gt;&lt;/div&gt;
+  &lt;!-- ネストされたロゴ Block --&gt;
+  &lt;div class="logo"&gt;&lt;/div&gt;
+  &lt;!-- ネストされた検索 Block --&gt;
+  &lt;form class="search"&gt;&lt;/form&gt;
+  &lt;!-- ネストされた認証 Block --&gt;
+  &lt;form class="auth"&gt;&lt;/form&gt;
+&lt;/header&gt;</code></pre>
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">.head .logo {
+  margin-right: 30px;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="contents">
+      <h3 class="contents__title">Mix</h3>
+      <p>
+        Mixは、「単一のDOMノードに、異なるBEMエンティティが複数付与されたインスタンス」と定義されている。<br>
+        簡単に言うと「ひとつのHTML要素に、役割の異なる複数のクラスが付いている状態」のことをいう。<br>
+        Mixを行うことにより、以下のことができるようになる。
+      </p>
+      <ul class="text-list">
+        <li class="text-list__item">コードを複製することなく、複数のBEMエンティティの振る舞いやスタイルを組み合わせる。</li>
+        <li class="text-list__item">既存のBEMエンティティから新しいモジュールを作成する。</li>
+      </ul>
+      <p>
+        Mixを使用する時は、positionやmarginなど「レイアウト（他の要素との位置を調整する）に絡む」変更の場合使用する。<br>
+        レイアウトではなく、そのBlock又はElement内で完結する変更の場合は、Modifierを使用する。<br>
+        Mixを利用することで「Blockの独立性が保たれる」というメリットがある。
+      </p>
+
+      <div class="code">
+        <p class="code__title">HTML</p>
+        <pre><code class="language-markup">&lt;header class="head"&gt;
+  &lt;div class="menu head__menu"&gt;&lt;/div&gt;
+  &lt;div class="logo head__logo"&gt;&lt;/div&gt;
+  &lt;form class="search head__search"&gt;&lt;/form&gt;
+  &lt;form class="auth head__auth"&gt;&lt;/form&gt;
+&lt;/header&gt;</code></pre>
+        <p class="code__title mt30">CSS</p>
+        <pre><code class="language-css">/* × .logoにスタイリングをしている */
+.head .logo {
+  margin-right: 30px;
+}
+
+/* ○ .head__logoにスタイリングをしている */
+.head__logo {
+  margin-right: 30px;
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small class="foot__copyright">&copy; 2020 hogehoge</small>
+  </footer>
+  <script src="../../dist/bundle.js"></script>
+</body>
+</html>
